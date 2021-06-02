@@ -34,7 +34,7 @@ func Infof(ctx context.Context, format string, args ...interface{}) {
 	if object, ok := parseObject(ctx); ok {
 		prefix = append(prefix, object)
 	}
-	klog.InfoDepth(1, fmt.Sprintf(strings.Join(prefix, " ")+format, args...))
+	klog.InfoDepth(1, fmt.Sprintf(strings.Join(prefix, "")+format, args...))
 }
 
 func Warning(ctx context.Context, args ...interface{}) {
@@ -63,7 +63,7 @@ func Warningf(ctx context.Context, format string, args ...interface{}) {
 	if object, ok := parseObject(ctx); ok {
 		prefix = append(prefix, object)
 	}
-	klog.WarningDepth(1, fmt.Sprintf(strings.Join(prefix, " ")+format, args...))
+	klog.WarningDepth(1, fmt.Sprintf(strings.Join(prefix, "")+format, args...))
 }
 
 func Error(ctx context.Context, args ...interface{}) {
@@ -92,7 +92,7 @@ func Errorf(ctx context.Context, format string, args ...interface{}) {
 	if object, ok := parseObject(ctx); ok {
 		prefix = append(prefix, object)
 	}
-	klog.ErrorDepth(1, fmt.Sprintf(strings.Join(prefix, " ")+format, args...))
+	klog.ErrorDepth(1, fmt.Sprintf(strings.Join(prefix, "")+format, args...))
 }
 
 func parseController(ctx context.Context) (string, bool) {
@@ -113,5 +113,5 @@ func parseValue(ctx context.Context, key contextKey) (string, bool) {
 	if !ok {
 		return "", false
 	}
-	return fmt.Sprintf("{\"%s\": %s}", key, value), true
+	return fmt.Sprintf("{\"%s\": %s} ", key, value), true
 }
